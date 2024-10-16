@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do-List</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>To-Do-List App</h1>
+    </header>
+
+    <main>
+        <div class="to-do-app">
+            <div class="to-do-app-header">
+                <div class="current-date">
+                    <span id="day-date"></span>
+                    <div id="month-year"></div>
+                </div>
+                <div class="flex-container">
+                    <div class="flex-container-column">
+                        <span id="total-tasks">0</span>
+                        <div>Total</div>
+                    </div>
+                    <div class="flex-container-column">
+                        <span id="remaining-tasks">0</span>
+                        <div>Remaining</div>
+                    </div>
+                    <div class="flex-container-column">
+                        <span id="done-tasks">0</span>
+                        <div>Done</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="to-do-list-container">
+                <p id="task-today"><span>Tasks</span> for Today</p>
+                <div class="to-do-list">
+                    <div class="tasks-container"></div>
+                </div>
+                <div id="add-container">
+                    <button id="add-item-btn" type="button">
+                        <span>+</span> Add new item
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Made by <span>Lucas Herrmann</span></p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
