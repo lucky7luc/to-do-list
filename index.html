@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do-List</title>
     <link rel="stylesheet" href="styles.css">
+    <title>To-Do-List</title>
 </head>
 <body>
     <header>
@@ -35,17 +35,39 @@
             </div>
 
             <div class="to-do-list-container">
-                <p id="task-today"><span>Tasks</span> for Today</p>
+
+                <p id="tasks"><span>Tasks</span> to be done<button id="clear-btn" type="button" class="btn">clear</button>
+                </p>
+                
                 <div class="to-do-list">
                     <div class="tasks-container"></div>
                 </div>
-                <div id="add-container">
-                    <button id="add-item-btn" type="button">
-                        <span>+</span> Add new item
-                    </button>
+               
+            </div>
+            <div id="add-container">
+                <button id="add-item-btn" type="button" class="btn">
+                    <span>+</span> Add new item
+                </button>
+                <div class="make-new-task">
+                <input type="text" id="text-value" >
+                <button id="add-task" type="button" class="btn"><span>add</span></button>
                 </div>
             </div>
         </div>
+
+        <dialog id="confirm-close-dialog">
+            <form method="dialog">
+              <p class="discard-message-text">Discard all tasks?</p>
+              <div class="confirm-close-dialog-btn-container">
+                <button id="cancel-btn" class="btn">
+                  Cancel
+                </button>
+                <button id="clear-all-btn" class="btn">
+                  Clear all tasks!
+                </button>
+              </div>
+            </form>
+          </dialog>
     </main>
 
     <footer>

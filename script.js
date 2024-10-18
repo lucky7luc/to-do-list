@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const doneTasks = document.getElementById('done-tasks');
     const tasksContainer = document.querySelector('.tasks-container');
     const addItemBtn = document.getElementById('add-item-btn');
-    const makeNewTask = document.getElementById('new-task');
+    const makeNewTask = document.querySelector('.make-new-task');
     const inputValue = document.getElementById('text-value');
     const addBtn = document.getElementById('add-task');
     const clearBtn = document.getElementById('clear-btn');
@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Get current date details
     const date = new Date();
+    const seconds = date.getSeconds();
     const day = date.getDay();
     const dayDate = date.getDate();
     const month = date.getMonth();
@@ -29,13 +30,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Get day name based on day index
     const getDayMessage = day => {
         switch (day) {
-            case 0: return Sunday;
-            case 1: return Monday;
-            case 2: return Tuesday;
-            case 3: return Wednesday;
-            case 4: return Thursday;
-            case 5: return Friday;
-            case 6: return Saturday;
+            case 0: return 'Sunday';
+            case 1: return 'Monday';
+            case 2: return 'Tuesday';
+            case 3: return 'Wednesday';
+            case 4: return 'Thursday';
+            case 5: return 'Friday';
+            case 6: return 'Saturday';
             default: return 'Invalid day';
         }
     };
@@ -69,6 +70,26 @@ document.addEventListener('DOMContentLoaded', () => {
     let doneTasksCounter = 0;
     let currentTask = {};
     
+    // Time since an added task
+    const timeSince = (timestamp) => {
+    const now = Date.now(); 
+    const secondsPast = Math.floor((now - timestamp) / 1000);
+    
+        if (secondsPast < 60) {
+            return `${secondsPast} s`;
+        } else if (secondsPast < 3600) {
+            const minutes = Math.floor(secondsPast / 60);
+            return `${minutes} min`;
+        } else if (secondsPast < 86400) {
+            const hours = Math.floor(secondsPast / 3600);
+            return `${hours} h`;
+        } else {
+            const days = Math.floor(secondsPast / 86400);
+            return `${days} d`;
+        }
+    };
+
+
     // Render tasks from the DOM
     const renderTasks = () => {
         tasksContainer.innerHTML = '';
@@ -78,13 +99,23 @@ document.addEventListener('DOMContentLoaded', () => {
         taskData.forEach(task => {
             const taskId = task.id;
             const taskValue = task.title;
+            const timeElapsed = timeSince(task.date);
             const deleteBtnId = `delete-item-btn-${taskId}`;
     
             tasksContainer.innerHTML += `
-                <div class="to-do-list-item">
-                    <input id="${taskId}" class="checkbox" type="checkbox" name="task" value="${taskValue}" >
+                <div class="tasks-item-container">
+                    <div>
+                    <input id="${taskId}" class="checkbox" type="checkbox" name="task" value="${taskValue}">
                     <label for="${taskId}" class="font-color">${taskValue}</label>
-                    <button id="${deleteBtnId}" class="delete-item-btn" type="button"><div class="x-shape"></div></button>
+                    </div>
+                    <div><span class="time-elapsed">${timeElapsed}</span>
+                    <button id="${deleteBtnId}" class="delete-item-btn" type="button">
+                        <div class="x-shape">
+                        <div class="line"></div>
+                        <div class="line"></div>
+                        </div>
+                    </button>
+                    </div>
                 </div>
             `;
             
@@ -157,10 +188,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!taskValue) return alert('Please enter a Task!');
     
         const dataArrIndex = taskData.findIndex((item) => item.id === currentTask.id);
+        const now = new Date();
         const taskObj = {
             id: `${taskValue.toLowerCase().split(" ").join("-")}-${Date.now()}`,
             title: taskValue,
-            date: Date.now(),
+            date: now.getTime(),
+            seconds: `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`,
             done: false,
         };
     
@@ -173,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         renderTasks();
         inputValue.value = '';
-        addItemBtn.style.display = 'block';
+        addItemBtn.style.display = 'inline-block';
         makeNewTask.style.display = 'none';
         addBtn.textContent = 'add';
     };
@@ -192,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Show the task input form
     const addNewTask = () => {
         addItemBtn.style.display = 'none';
-        makeNewTask.style.display = 'block';
+        makeNewTask.style.display = 'inline-block';
         addBtn.addEventListener('click', addOrUpdateTask);
         inputValue.addEventListener('keydown', e => {
             if (e.key === 'Enter' || e.key === 'Return') {
@@ -219,11 +252,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     cancelBtn.addEventListener("click", () => {
         confirmCloseDialog.close()
-        clearBtn.style.display = 'block';
+        clearBtn.style.display = 'inline-block';
     });
     clearAllBtn.addEventListener("click", () => {
     confirmCloseDialog.close();
-    clearBtn.style.display = 'block';
+    clearBtn.style.display = 'inline-block';
     clearTaskContainer();
     });
     renderTasks();

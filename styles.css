@@ -1,21 +1,33 @@
 body {
     font-family: Arial, sans-serif;
+    text-align: center;
+    background: linear-gradient(100deg, rgb(236, 234, 234), rgb(190, 189, 189));
+    height: 100vh;
 }
 
 header {
-    text-align: center;
-    margin: 20px 0;
+    margin: 4em 0;
 }
 
 .to-do-app {
     width: 300px;
+    height: 500px;
     margin: 0 auto;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 2px 2px 8px black;
+    background-color: white;
 }
 
 .to-do-app-header {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+    flex-direction: column;
+    width: 100%;
+    height: 95px;
+    padding-top: 5px;
+    background: linear-gradient(30deg, rgb(18, 194, 210), rgb(42, 44, 184), rgb(198, 25, 204));
+    color: white;
+    border-radius: 10px 10px 0 0;
 }
 
 .flex-container {
@@ -23,70 +35,125 @@ header {
 }
 
 .flex-container-column {
-    margin: 0 10px;
+    margin: 20px 25px 0 25px;
 }
 
 .to-do-list-container {
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 5px;
+    height: 345px;
+    overflow: scroll;
 }
 
-.tasks-item {
-    margin-right: 10px;
+#tasks {
+    position: relative;
+    left: 23px;
 }
 
-.task-item {
+#add-container {
+    height: 6%;
+    padding: 8px;
+}
+
+.btn {
+    cursor: pointer;
+    background: linear-gradient(30deg, rgb(18, 194, 210), rgb(42, 44, 184), rgb(198, 25, 204));
+    color: white;
+    font-size: 0.9rem;
+    padding: 5px 12px;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 2px 2px 5px black;
+}
+
+#clear-btn {
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    position: relative;
+    left: 30px;
+    box-shadow: 1px 1px 4px black;
+}
+
+.make-new-task {
+    display: none;
+}
+
+#text-value {
+    border: 1px solid blue;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    padding: 5px 12px;
+    box-shadow: 2px 2px 5px black;
+}
+
+.tasks-container {
+    padding: 0 15px;
+}
+
+.tasks-item-container {
     display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+    justify-content: space-between;
+}
+
+.checkbox {
+    margin: 0 10px 5px 0;
+    cursor: pointer;
+}
+
+.time-elapsed {
+    font-size: 0.65rem;
+    color: gray;
 }
 
 .delete-item-btn {
-    margin-left: 10px;
-    background: red;
-    color: white;
+    position: relative;
+    top: 2px;
+    margin-left: 5px;
+    background: linear-gradient(30deg, rgb(18, 194, 210), rgb(42, 44, 184), rgb(198, 25, 204));
     border: none;
     cursor: pointer;
-    padding: 5px;
-    border-radius: 3px;
+    padding: 2px;
+    height: 15px;
+    border-radius: 50%;
+    box-shadow: 1px 1px 4px black;
+}
+
+.x-shape {
+    position: relative;
+    top: 3.3px;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+}
+
+.x-shape .line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.x-shape .line:first-child {
+    transform: rotate(45deg);
+}
+
+.x-shape .line:last-child {
+    transform: rotate(-45deg);
+}
+
+#confirm-close-dialog {
+    border: 2px solid black;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px black;
+}
+
+#confirm-close-dialog button {
+    margin: 0 5px;
 }
 
 footer {
-    text-align: center;
-    margin-top: 20px;
+    margin-top: 2em;
 }
-
-        .x-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100px;
-            height: 100px;
-            margin: 50px;
-            background-color: lightgray; /* zur Visualisierung des Containers */
-        }
-
-        .x-shape {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 65%;
-            height: 65%;
-            position: relative;
-        }
-
-        .x-shape .line {
-            position: absolute;
-            width: 100%;
-            height: 2.5px;
-            background-color: var(--font-color, black); /* Standard-Farbe schwarz */
-        }
-
-        .x-shape .line:first-child {
-            transform: rotate(45deg);
-        }
-
-        .x-shape .line:last-child {
-            transform: rotate(-45deg);
-        }
+    
+span {
+    font-weight: bold;
+}
