@@ -13,10 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const confirmCloseDialog = document.getElementById('confirm-close-dialog');
     const cancelBtn = document.getElementById('cancel-btn');
     const clearAllBtn = document.getElementById('clear-all-btn');
+    const toDoListContainer = document.querySelector('.hidden');
     
     // Get current date details
     const date = new Date();
-    const seconds = date.getSeconds();
     const day = date.getDay();
     const dayDate = date.getDate();
     const month = date.getMonth();
@@ -69,6 +69,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let remainingTasksCounter = 0;
     let doneTasksCounter = 0;
     let currentTask = {};
+
+    // Set to store unique task titles
+    const taskTitlesSet = new Set(taskData.map(task => task.title.toLowerCase().trim()));
     
     // Time since an added task
     const timeSince = (timestamp) => {
@@ -184,7 +187,10 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Add or update a task to localstorage
     const addOrUpdateTask = () => {
-        const taskValue = inputValue.value.trim();
+        const taskValue = inputValue.value.trim().toLowerCase();
+
+        if (taskTitlesSet.has(taskValue)) return alert('Task already exists!');
+            
         if (!taskValue) return alert('Please enter a Task!');
     
         const dataArrIndex = taskData.findIndex((item) => item.id === currentTask.id);
@@ -226,14 +232,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const addNewTask = () => {
         addItemBtn.style.display = 'none';
         makeNewTask.style.display = 'inline-block';
-        addBtn.addEventListener('click', addOrUpdateTask);
-        inputValue.addEventListener('keydown', e => {
-            if (e.key === 'Enter' || e.key === 'Return') {
-                e.preventDefault();
-                addOrUpdateTask();
-            }
-        });
+        inputValue.removeAttribute('disabled');
     };
+
+    addBtn.addEventListener('click', addOrUpdateTask);
+    inputValue.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === 'Return') {
+            e.preventDefault();
+            addOrUpdateTask();
+        }
+    });
 
     // Clear all tasks from localStorage
     const clearTaskContainer = () => {
@@ -244,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const openTaskForm = () => {
         confirmCloseDialog.showModal();
-        clearBtn.style.display = 'none';
+        toDoListContainer.style.display = 'none';
     }
     
     addItemBtn.addEventListener('click', addNewTask);
@@ -252,11 +260,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     cancelBtn.addEventListener("click", () => {
         confirmCloseDialog.close()
-        clearBtn.style.display = 'inline-block';
+        toDoListContainer.style.display = 'inline-block';
     });
     clearAllBtn.addEventListener("click", () => {
     confirmCloseDialog.close();
-    clearBtn.style.display = 'inline-block';
+    toDoListContainer.style.display = 'inline-block';
     clearTaskContainer();
     });
     renderTasks();

@@ -33,26 +33,27 @@
                     </div>
                 </div>
             </div>
+        
+            <div class="hidden">    
+                <div class="to-do-list-container">
 
-            <div class="to-do-list-container">
+                    <p id="tasks"><span>Tasks</span> to be done<button id="clear-btn" type="button" class="btn">clear</button></p>
 
-                <p id="tasks"><span>Tasks</span> to be done<button id="clear-btn" type="button" class="btn">clear</button>
-                </p>
+                    <div class="to-do-list">
+                        <div class="tasks-container"></div>
+                    </div>
                 
-                <div class="to-do-list">
-                    <div class="tasks-container"></div>
                 </div>
-               
-            </div>
-            <div id="add-container">
-                <button id="add-item-btn" type="button" class="btn">
-                    <span>+</span> Add new item
-                </button>
-                <div class="make-new-task">
-                <input type="text" id="text-value" >
-                <button id="add-task" type="button" class="btn"><span>add</span></button>
+                <div id="add-container">
+                    <button id="add-item-btn" type="button" class="btn">
+                        <span>+</span> Add new item
+                    </button>
+                    <div class="make-new-task">
+                    <input type="text" id="text-value" maxlength="22" disabled="true">
+                    <button id="add-task" type="button" class="btn"><span>add</span></button>
+                    </div>
                 </div>
-            </div>
+            </div>    
         </div>
 
         <dialog id="confirm-close-dialog">
